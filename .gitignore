@@ -8,3 +8,6 @@ __pycache__/
 ApplicationServer/__pycache__/
 AuthServer/__pycache__/
 
+# secured files
+ApplicationServer/dbDetails.py
+AuthServer/dbDetails.py

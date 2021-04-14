@@ -5,19 +5,7 @@ from re import U
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 
-client = MongoClient(
-    'mongodb+srv://rishu_kewl:rishu_kewl@cluster0.pfkvm.mongodb.net/test')
-
-DataBase = client.get_database("LenDen")
-
-convo = DataBase.get_collection("conversation")
-accounts = DataBase.get_collection("accounts")
-users = DataBase.get_collection("users")
-chats = DataBase.get_collection("chats")
-transactions = DataBase.get_collection("transactions")
-userConvo = DataBase.get_collection("userConversations")
-connections = DataBase.get_collection("connections")
-
+from ApplicationServer.dbDetails import *
 
 ####
 

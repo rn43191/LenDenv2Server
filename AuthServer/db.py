@@ -3,16 +3,8 @@ from pymongo import MongoClient
 import hashlib
 import uuid
 from datetime import datetime
+from AuthServer.dbDetails import *
 
-client = MongoClient(
-    'mongodb+srv://rishu_kewl:rishu_kewl@cluster0.pfkvm.mongodb.net/test')
-
-DataBase = client.get_database("LenDen")
-
-
-users = DataBase.get_collection("users")
-accounts = DataBase.get_collection("accounts")
-userConvo = DataBase.get_collection("userConversations")
 
 
 def validateUser(userId, password):
