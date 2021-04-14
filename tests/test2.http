@@ -1,0 +1,10 @@
+POST http://127.0.0.1:5002/create/memo HTTP/1.1
+Content-Type: application/json
+Authorization: Token eYJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZlciIsImV4cCI6MTYxNjkyNzI5OS4xNjczNjcyLCJ1c2VyX2lkIjoicmlzaHUifQ.Jnh5VcJOpyGG-iqED1Tvy_bhIh-h9BNBESjkG8UdJW2fzU2nU8zFOpHCrzjqx-EHbOhp-6Yin9R2OJMydGlY2_g5ker7tevZXSbHrMplYOmL3NLH6HXTcj6e-SH5DPcmI3RdHVR13fZUfTqtrYKCofRFZIbuSphh1rdMiAANWF9IQNf6I_uh0suCr9tKPNmDyh-9AbAqXXousMXW7FIRN05LEdMKlVpNNA-9cQGOsE6Lkwc894wbnBJP6eNMJ2AEfpBeyecvQBR7c77vIlLh3R0jrDOZkOcE6j2FjCVyKhdizUWWv7dv50Mo4ift1cRTtmMNDnldWBcVLLQ-unGp0w
+
+{
+    "msg_type":"transaction",
+    "memo":400,
+    "sent_time":"324wfsdg",
+    "conversation_id":"60603268a0b2b350ce5d5e3e"
+}

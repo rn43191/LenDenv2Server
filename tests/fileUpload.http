@@ -1,0 +1,21 @@
+POST http://127.0.0.1:5001/signup HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image_data"; filename="image.jpg"
+Content-Type: image/jpg
+
+< ./Untitledasfddsdaf.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="json"
+Content-Type: application/json
+
+{
+    "user_id":"keitha2",
+    "password":"123456789",
+    "email":"keitha2@gmail.com",
+    "first_name":"y",
+    "last_name":"y",
+    "phone":"+123453434"
+}
+------WebKitFormBoundary7MA4YWxkTrZu0gW--

@@ -1,0 +1,9 @@
+POST http://127.0.0.1:5002/convo HTTP/1.1
+Content-Type: application/json
+Authorization: Token eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJhdXRoLXNlcnZlciIsImV4cCI6MTYxNzI1NTY4My4xNjQ4MjIsInVzZXJfaWQiOiJ5YWRvbyJ9.TFSO7nQ0fShV1Odn6_u4Kr6SiFiuBIXX1-io3QJwtVNo0j3gm3oocbq9DKqPGFGuXjpdtU_Zd2SwtUsqf5ywMd0MEZe6zLewkeh26uDN2Cozd-3ZWR8yelwoPi_Ni2hhw5TJWN5J13cl8neCQ0RWC807jvvqSQCR0G-nNXbubIWcM3xnVo12ln7B3HQjPhvWEfswHFSQC7hK_sJwKhw_D2sM0NJqcFlLpncZHFXn2VymivaepBf_v4GNWPzmG6H-pAafxmXekDDsXQF5MwCh4jIoJmTiEnN1FRb3kXgIkWGz2OE_uPjzzGNJVZEnhA547X2M5XmG_V5W-DaFHXH18w
+
+{
+    "title":"2 ki convo",
+    "participants":["yadoo","xyz"],
+    "type":"direct"
+}

@@ -1,0 +1,11 @@
+POST http://127.0.0.1:5001/signup HTTP/1.1
+Content-Type: application/json
+
+{
+    "user_id":"yadoo2",
+    "password":"123456789",
+    "email":"rtgjc22@gmail.com",
+    "first_name":"y",
+    "last_name":"y",
+    "phone":"+123453434"
+}
