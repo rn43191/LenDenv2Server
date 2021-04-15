@@ -14,7 +14,8 @@ from bson import json_util
 import db
 
 app = Flask(__name__)
-socketio = SocketIO(app,cors_allowed_origins='*')
+socketio = SocketIO(app, cors_allowed_origins='*')
+
 
 @app.route("/convo", methods=["POST", "GET"])
 def conversation():
@@ -25,16 +26,16 @@ def conversation():
         data = request.get_json()
         title = data.get("title")
         participants = data.get("participants")
-        desc=data.get("description")
+        desc = data.get("description")
 
         if None in [title, participants]:
-            return app.response_class(response=json.dumps({"status": "failure", "error": "Invalid request"}), mimetype="application/json",), 400
+            return app.response_class(response=json.dumps({"status": "failure", "error": "Invalid request","data":None}), mimetype="application/json",), 400
 
         userId = authResponse.get("data").get("user_id")
         participants.append(userId)
-        addConvoRes = db.addConversation(userId, title, participants,desc)
+        addConvoRes = db.addConversation(userId, title, participants, desc)
         if addConvoRes.get("status"):
-            return app.response_class(response=json.dumps({"status": "success", "error": None}), mimetype="application/json",), 200
+            return app.response_class(response=json.dumps({"status": "success", "error": None,"data":addConvoRes.get("data")}), mimetype="application/json",), 200
         else:
             return app.response_class(response=json.dumps({"status": "failure", "error": addConvoRes.get("error")}), mimetype="application/json",), 400
 
@@ -70,7 +71,8 @@ def chatOrTrans():
             chatOrTransType = msgType
         if memoType == "transaction":
             chatOrTransType = transType
-        addMemoRes=db.addMemo(memoType, memo, sentTime, convoId, userId, chatOrTransType)
+        addMemoRes = db.addMemo(memoType, memo, sentTime,
+                                convoId, userId, chatOrTransType)
         if addMemoRes.get("status"):
             return app.response_class(response=json.dumps({"status": "success", "error": None}), mimetype="application/json",), 200
         else:
@@ -100,7 +102,7 @@ def connection():
         userDetails = db.getUserDetails(userId)
         contactDetails = db.getUserDetails(contactId)
         if not userDetails.get("email_verified") or not contactDetails.get("email_verified"):
-            return app.response_class(response=json.dumps({"status": "failure", "error": "Email not verified"}), mimetype="application/json",),400
+            return app.response_class(response=json.dumps({"status": "failure", "error": "Email not verified"}), mimetype="application/json",), 400
         usersName = userDetails.get("first_name") + \
             " "+userDetails.get("last_name")
         if contactsName is None:
@@ -118,25 +120,24 @@ def connection():
 
         userId = authResponse.get("data").get("user_id")
         data = db.getUserConnections(userId)
-        
+
         if not data.get("status"):
 
             return app.response_class(response=json.dumps({"status": "failure", "error": data.get("error"), "data": None}), mimetype="application/json"),  400
-        
-        
+
         return app.response_class(response=json.dumps({"status": "success", "error": None, "data": data.get("data")}), mimetype="application/json"),  200
 
     return app.response_class(response=json.dumps({"status": "unauthorized", "error": authResponse.get("error")}), mimetype="application/json",), 401
 
 
-@app.route("/fetch/users/<value>",methods=["GET"])
+@app.route("/fetch/users/<value>", methods=["GET"])
 def fetchUsers(value):
     authResponse = authentication()
     if authResponse["statusCode"] == 200 and authResponse["isVerified"]:
         userId = authResponse.get("data").get("user_id")
-        contactRes=db.getContactDetails(value,userId)
+        contactRes = db.getContactDetails(value, userId)
 
-        return app.response_class(response=json.dumps({"status": "success", "error": None,"data":contactRes}), mimetype="application/json",), 200
+        return app.response_class(response=json.dumps({"status": "success", "error": None, "data": contactRes}), mimetype="application/json",), 200
 
     return app.response_class(response=json.dumps({"status": "unauthorized", "error": authResponse.get("error")}), mimetype="application/json",), 401
 
@@ -145,7 +146,6 @@ def fetchUsers(value):
 def summary(convoId):
     authResponse = authentication()
     if authResponse["statusCode"] == 200 and authResponse["isVerified"]:
-    
 
         userId = authResponse.get("data").get("user_id")
         transRes = db.summarizeTransaction(convoId, userId)
@@ -248,8 +248,11 @@ def chat(data):
                      json.dumps({
                          "status": "success",
                          "error": None,
-                         "data": {"memo_type": memoType, "type": chatOrTransType, s: memo, "sent_time": sentTime,
-                                  "conversation_id": convoId, "sender_id": userId}
+                         "data": {
+                             "_id": addMemoRes.get("data"), "memo_type":
+                             memoType, "type": chatOrTransType, s: memo, "sent_time": sentTime,
+                             "conversation_id": convoId, "sender_id": userId
+                         }
                      }, default=json_util.default),
                      namespace="/memo", room=convoId)
             else:
@@ -302,5 +305,5 @@ if __name__ == '__main__':
     #context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
     #context.load_cert_chain('domain.crt', 'domain.key')
     #app.run(port = 5000, debug = True, ssl_context = context)
-    socketio.run(app, port=5002,debug=True)
+    socketio.run(app, port=5002, debug=True)
     # app.run(port=5002, debug=True)

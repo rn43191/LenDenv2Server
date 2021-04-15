@@ -5,15 +5,15 @@ Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0g
 Content-Disposition: form-data; name="image_data"; filename="image.jpg"
 Content-Type: image/jpg
 
-< ./Untitledasfddsdaf.jpg
+< ./un2.jpg
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="json"
 Content-Type: application/json
 
 {
-    "user_id":"keitha2",
+    "user_id":"praddy",
     "password":"123456789",
-    "email":"keitha2@gmail.com",
+    "email":"praddy@praddy.com",
     "first_name":"y",
     "last_name":"y",
     "phone":"+123453434"

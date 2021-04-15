@@ -253,7 +253,7 @@ def sendEmail():
 def verifyEmail(token):
     try:
         email = serializer.loads(
-            token, salt='auth-server-email-verification', max_age=600)
+            token, salt='auth-server-email-verification', max_age=6000)
         updateEmailRes = updateEmailVerification(email)
         if not updateEmailRes.get("status"):
             return render_template("errorTemplate.html", status="failure", error=updateEmailRes.get("error")), 400
